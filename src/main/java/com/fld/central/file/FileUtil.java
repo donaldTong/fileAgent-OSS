@@ -60,6 +60,32 @@ public class FileUtil {
 
 		return src;
 	}
+	
+	/**
+	 * 上传文件
+	 * 
+	 * @param fileBytes
+	 *            文件数据
+	 * @param fileName
+	 *            文件名
+	 * @return
+	 */
+	public static String uploadInputStream(FileDto fileDto) {
+		
+		logger.info("BUCKETNAME={},file={}", OSSMgrFactory.ALIYUN_OSS_BUCKETNAME ,JSON.toJSONString(fileDto.getFileName()));
+		
+		OSSMgrFactory oSSMgrFactory = new OSSMgrFactory();
+		
+		String key = oSSMgrFactory.upload(OSSMgrFactory.ALIYUN_OSS_BUCKETNAME, fileDto.getInput(), fileDto.getFileName(), fileDto.getRename());
+		
+		if (StringUtils.isBlank(key)) {
+			return null;
+		}
+		
+		String src = OSSMgrFactory.ALIYUN_OSS_ACCESSURL.replace("{bucketName}", OSSMgrFactory.ALIYUN_OSS_BUCKETNAME) + "/" + key;
+		
+		return src;
+	}
 
 	/**
 	 * 下载文件

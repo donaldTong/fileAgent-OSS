@@ -1,5 +1,7 @@
 package com.fld.central.file.dto;
 
+import java.io.InputStream;
+
 /** 
  * 文件Dto
  * @Title: FileDto.java 
@@ -15,6 +17,8 @@ public class FileDto {
 	private String fileName; 
 	
 	private Boolean rename;
+	
+	private InputStream input;
 
 	public byte[] getFileBytes() {
 		return fileBytes;
@@ -38,6 +42,14 @@ public class FileDto {
 
 	public void setRename(Boolean rename) {
 		this.rename = rename;
+	}
+
+	public InputStream getInput() {
+		return input;
+	}
+
+	public void setInput(InputStream input) {
+		this.input = input;
 	}
 	
 }
