@@ -42,6 +42,7 @@ public class OSSMgrFactory {
 		Properties props = null;
 		try {
 			Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:app.properties");
+			logger.debug("扫描文件:resources.size={}", resources.length);
 			props = PropertiesLoaderUtils.loadProperties(resources[(resources.length - 1)]);
 			
 		} catch (IOException e) {
