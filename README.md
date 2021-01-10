@@ -7,6 +7,7 @@ oss文件上传下载
 
 
 3.配置根路径app.properties
+
 aliyun.AccessKeyId=
 
 aliyun.AccessKeySecret=
