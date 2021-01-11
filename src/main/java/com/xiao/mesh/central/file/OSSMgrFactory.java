@@ -1,17 +1,4 @@
-package com.fld.central.file;
-
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.UUID;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
+package com.xiao.mesh.central.file;
 
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSClient;
@@ -19,6 +6,13 @@ import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.util.UUID;
 
 /**
  * 文件上传下载
@@ -38,41 +32,46 @@ public class OSSMgrFactory {
 
 	private OSSClient ossClient;
 	
-	public void init() {
-		Properties props = null;
-		try {
-			Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:app.properties");
-			logger.debug("扫描文件:resources.size={}", resources.length);
-			props = PropertiesLoaderUtils.loadProperties(resources[(resources.length - 1)]);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (props.containsKey("aliyun.AccessKeyId"))
-			ALIYUN_ACCESSKEYID = props.getProperty("aliyun.AccessKeyId");
-		else 
-			ALIYUN_ACCESSKEYID = null;
-
-		if (props.containsKey("aliyun.AccessKeySecret"))
-			ALIYUN_ACCESSKEYSECRET = props.getProperty("aliyun.AccessKeySecret");
-		else
-			ALIYUN_ACCESSKEYSECRET = null;
-		
-		if (props.containsKey("aliyun.oss.endpoint"))
-			ALIYUN_OSS_ENDPOINT = props.getProperty("aliyun.oss.endpoint");
-		else
-			ALIYUN_OSS_ENDPOINT = null;
-		
-		if (props.containsKey("aliyun.oss.accessUrl"))
-			ALIYUN_OSS_ACCESSURL = props.getProperty("aliyun.oss.accessUrl");
-		else
-			ALIYUN_OSS_ACCESSURL = null;
-		
-		if (props.containsKey("aliyun.oss.bucketName"))
-			ALIYUN_OSS_BUCKETNAME = props.getProperty("aliyun.oss.bucketName");
-		else
-			ALIYUN_OSS_BUCKETNAME = null;
+	public void init(String accessKeyId, String accessKeySecret, String endpoint, String accessUrl, String bucketName) {
+		ALIYUN_ACCESSKEYID = accessKeyId;
+		ALIYUN_ACCESSKEYSECRET = accessKeySecret;
+		ALIYUN_OSS_ENDPOINT = endpoint;
+		ALIYUN_OSS_ACCESSURL = accessUrl;
+		ALIYUN_OSS_BUCKETNAME = bucketName;
+//		Properties props = null;
+//		try {
+//			Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:application.yml");
+//			logger.debug("扫描文件:resources.size={}", resources.length);
+//			props = PropertiesLoaderUtils.loadProperties(resources[(resources.length - 1)]);
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		if (props.containsKey("aliyun.oss.accessKeyId"))
+//			ALIYUN_ACCESSKEYID = props.getProperty("aliyun.oss.accessKeyId");
+//		else
+//			ALIYUN_ACCESSKEYID = null;
+//
+//		if (props.containsKey("aliyun.oss.accessKeySecret"))
+//			ALIYUN_ACCESSKEYSECRET = props.getProperty("aliyun.oss.accessKeySecret");
+//		else
+//			ALIYUN_ACCESSKEYSECRET = null;
+//
+//		if (props.containsKey("aliyun.oss.endpoint"))
+//			ALIYUN_OSS_ENDPOINT = props.getProperty("aliyun.oss.endpoint");
+//		else
+//			ALIYUN_OSS_ENDPOINT = null;
+//
+//		if (props.containsKey("aliyun.oss.accessUrl"))
+//			ALIYUN_OSS_ACCESSURL = props.getProperty("aliyun.oss.accessUrl");
+//		else
+//			ALIYUN_OSS_ACCESSURL = null;
+//
+//		if (props.containsKey("aliyun.oss.bucketName"))
+//			ALIYUN_OSS_BUCKETNAME = props.getProperty("aliyun.oss.bucketName");
+//		else
+//			ALIYUN_OSS_BUCKETNAME = null;
 	}
 
 	public void destroy() {
