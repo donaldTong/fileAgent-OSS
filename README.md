@@ -34,9 +34,9 @@ oss文件上传下载
     }
     
     
-3.配置根路径app.properties
-    aliyun.AccessKeyId=
-    aliyun.AccessKeySecret=
+3.配置根路径yml文件中
+    aliyun.oss.AccessKeyId=
+    aliyun.oss.AccessKeySecret=
     aliyun.oss.endpoint=
     aliyun.oss.accessUrl=
     aliyun.oss.bucketName=
